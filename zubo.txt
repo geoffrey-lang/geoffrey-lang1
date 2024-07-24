@@ -1,7 +1,7 @@
 北京电信(ipip),#genre#
 CCTV1HD,http://115.171.216.195:4000/udp/225.1.8.1:8008
-CCTV2HD,http://115.171.80.16:8888/225.1.8.2:8084
-CCTV3HD,http://ipip/udp/225.1.8.88:8000
+CCTV2HD,http://115.171.80.16:8888/udp/225.1.8.2:8084
+CCTV3HD,http://115.171.80.16:8888/udp/225.1.8.88:8000
 CCTV4HD,http://ipip/udp/225.1.8.4:8092
 CCTV5HD,http://ipip/udp/225.1.8.89:8000
 CCTV5⁺HD,http://ipip/udp/225.1.8.20:8004
