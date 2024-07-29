@@ -3,6 +3,7 @@ name: Update IP addresses
 on:
   schedule:
     - cron: '0 2 * * *' # 每天凌晨2点（UTC时间，视时区而定）
+  workflow_dispatch: # 允许手动触发
 
 jobs:
   update_ips:
@@ -23,14 +24,14 @@ jobs:
 
     - name: Fetch IPs and update file
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
       run: |
         import requests
         from bs4 import BeautifulSoup
         from github import Github
         import os
 
-        GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
+        MY_GITHUB_TOKEN = os.getenv('MY_GITHUB_TOKEN')
         REPO_NAME = 'geoffrey-lang/geoffrey-lang1'
         FILE_PATH = 'IP'
 
@@ -51,7 +52,7 @@ jobs:
             return fastest_ips
 
         def update_github(fastest_ips):
-            g = Github(GITHUB_TOKEN)
+            g = Github(MY_GITHUB_TOKEN)
             repo = g.get_repo(REPO_NAME)
             contents = repo.get_contents(FILE_PATH)
             new_content = "\n".join([f"{region}: {', '.join(ips)}" for region, ips in fastest_ips.items()])
