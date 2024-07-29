@@ -26,38 +26,4 @@ jobs:
       env:
         MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
       run: |
-        import requests
-        from bs4 import BeautifulSoup
-        from github import Github
-        import os
-
-        MY_GITHUB_TOKEN = os.getenv('MY_GITHUB_TOKEN')
-        REPO_NAME = 'geoffrey-lang/geoffrey-lang1'
-        FILE_PATH = 'IP'
-
-        def get_fastest_ips():
-            url = 'https://tonkiang.us'
-            response = requests.get(url)
-            soup = BeautifulSoup(response.content, 'html.parser')
-            
-            regions = ['北京联通', '上海电信', '广东电信', '四川电信', '天津联通']
-            fastest_ips = {}
-
-            for region in regions:
-                ips = soup.find_all('div', class_=region)
-                if ips:
-                    top_ips = [ip.text.strip() for ip in ips[:3]]
-                    fastest_ips[region] = top_ips
-            
-            return fastest_ips
-
-        def update_github(fastest_ips):
-            g = Github(MY_GITHUB_TOKEN)
-            repo = g.get_repo(REPO_NAME)
-            contents = repo.get_contents(FILE_PATH)
-            new_content = "\n".join([f"{region}: {', '.join(ips)}" for region, ips in fastest_ips.items()])
-
-            repo.update_file(contents.path, "Update IP addresses", new_content, contents.sha)
-
-        fastest_ips = get_fastest_ips()
-        update_github(fastest_ips)
+        python update_ips.py
