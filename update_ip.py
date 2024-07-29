@@ -3,14 +3,18 @@ from collections import defaultdict
 
 def get_top_3_ips():
     response = requests.get('https://tonkiang.us/api')
+    response.raise_for_status()  # 检查请求是否成功
     data = response.json()
 
     regions = ['北京联通', '上海电信', '广东电信', '四川电信', '天津联通']
     top_3_ips = defaultdict(list)
 
     for region in regions:
-        sorted_ips = sorted(data[region], key=lambda x: x['speed'], reverse=True)
-        top_3_ips[region] = [ip['ip'] for ip in sorted_ips[:3]]
+        if region in data:
+            sorted_ips = sorted(data[region], key=lambda x: x['speed'], reverse=True)
+            top_3_ips[region] = [ip['ip'] for ip in sorted_ips[:3]]
+        else:
+            top_3_ips[region] = ['No data available']
 
     return top_3_ips
 
