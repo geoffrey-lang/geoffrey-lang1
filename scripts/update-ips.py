@@ -4,7 +4,7 @@ from github import Github
 import os
 
 # 配置
-GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
+GITHUB_TOKEN = os.getenv('MY_GITHUB_TOKEN')
 REPO_NAME = 'geoffrey-lang/geoffrey-lang1'  # 替换为你的GitHub用户名和存储库名
 FILE_PATH = 'zubo.txt'
 URL = "http://tonkiang.us/path_to_multicast_ip_list"  # 替换为实际的URL
@@ -25,4 +25,4 @@ if __name__ == "__main__":
     ip_info_list = get_multicast_ips(URL)
     # 假设所有IP都被保留或者经过筛选
     content = "\n".join([f"{ip} {info}" for ip, info in ip_info_list])
-    update_github_file(REPO_NAME, FILE_PATH, content, GITHUB_TOKEN)
+    update_github_file(REPO_NAME, FILE_PATH, content, MY_GITHUB_TOKEN)
