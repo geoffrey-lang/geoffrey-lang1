@@ -155,7 +155,6 @@ CETV4,http://61.172.6.29:8888/udp/239.45.1.243:5140
 延边卫视,http://61.172.6.29:8888/udp/239.45.0.39:5140
 
 北京联通,#genre#
-#EXTM3U name="bj-unicom-iptv"
 #EXTINF:-1,CCTV-1高清
 rtp://239.3.1.129:8008
 #EXTINF:-1,CCTV-2高清
